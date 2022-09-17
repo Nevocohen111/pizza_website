@@ -1,0 +1,163 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.myImages :hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  box-shadow: 10px 12px 0 1px rgba(0,0,0,0.3);
+}
+
+
+.myImage {
+  border-radius: 5px;
+  opacity: 0.85;
+ 
+}
+.pizzaCard {
+  
+  opacity: 0.75;
+}
+
+.top-to-btm{
+  position: relative;
+}
+.icon-position{
+  position: fixed;
+  bottom: 40px;
+  right: 25px;
+  z-index: 20;
+}
+.icon-style{
+background-color: #551B54;
+border: 2px solid #fff;
+border-radius: 50%;
+height: 50px;
+width: 50px;
+color: #fff;
+cursor: pointer;
+animation: movebtn 3s ease-in-out infinite;
+transition: all .5s ease-in-out;
+}
+.icon-style:hover{
+animation: none;
+background: #fff;
+color: #551B54;
+border: 2px solid #551B54;
+}
+@keyframes movebtn {
+0%{
+  transform: translateY(0px);
+}
+25%{
+  transform: translateY(20px);
+}
+50%{
+  transform: translateY(0px);
+}
+75%{
+  transform: translateY(-20px);
+}
+100%{
+  transform: translateY(0px);
+}
+}
+
+
+
+.textBG{
+  margin:0;
+  padding:0;
+  font-family: 'Tomorrow', sans-serif;
+  height:100vh;
+background-image: linear-gradient(to top, #2e1753, #1f1746, #131537, #0d1028, #050819);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.text{
+  position:absolute;
+  top:10%;
+  color:#fff;
+  text-align:center;
+}
+h1{
+  font-size:50px;
+}
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  right:0;
+  animation:starTwinkle 3s infinite linear;
+}
+.astronaut img{
+  width:100px;
+  position:absolute;
+  top:55%;
+  animation:astronautFly 6s infinite linear;
+}
+@keyframes astronautFly{
+  0%{
+    left:-100px;
+  }
+  25%{
+    top:50%;
+    transform:rotate(30deg);
+  }
+  50%{
+    transform:rotate(45deg);
+    top:55%;
+  }
+  75%{
+    top:60%;
+    transform:rotate(30deg);
+  }
+  100%{
+    left:110%;
+    transform:rotate(45deg);
+  }
+}
+@keyframes starTwinkle{
+  0%{
+     background:rgba(255,255,255,0.4);
+  }
+  25%{
+    background:rgba(255,255,255,0.8);
+  }
+  50%{
+   background:rgba(255,255,255,1);
+  }
+  75%{
+    background:rgba(255,255,255,0.8);
+  }
+  100%{
+    background:rgba(255,255,255,0.4);
+  }
+}
+
+
