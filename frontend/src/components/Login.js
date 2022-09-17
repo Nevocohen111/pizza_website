@@ -1,21 +1,55 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useEffect } from "react";
 import axios from "../api/axios";
 import PizzaCard from "./PizzaCard";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { confirmAlert } from "react-confirm-alert";
+import { useCookies } from 'react-cookie';
+
 
 export default function Login(props) {
-    const { setAuth } = useContext(AuthContext);
+    const { auth, setAuth } = useContext(AuthContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
     const [error, setError] = useState("");
     const [errorFlag, setErrorFlag] = useState(false);
-    const navigate = useNavigate();
-    
+    const [cookies, setCookie] = useCookies(['user']);
 
+    const navigate = useNavigate();
     const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\s*([^;]*).*$)|^.*$/, '$1');
+
+
+    const submit = () => {
+        confirmAlert({
+            title: "This site uses cookies",
+            message: "Do you want to allow cookies?",
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => handleCookie()
+                },
+                {
+                    label: "No"
+                }
+            ]
+        });
+    };
+
+    const cookieStorage = () => {
+        const cookieName = cookies.Name;
+        const cookiePwd = cookies.Password;
+    }
+
+    const handleCookie = () => {
+        if (auth?.name !== undefined) {
+            setCookie('Name', name, { path: '/' });
+            setCookie('Password', pwd, { path: '/' });
+        }
+    }
+
 
     const handleSubmit = async () => {
         try {
@@ -31,6 +65,7 @@ export default function Login(props) {
             const roles = response.data.role.roleId;
             const accessToken = response.data.accessToken;
             setAuth({ name, email, roles, accessToken });
+            submit();
             navigate(`/login=true`);
             props.setMatches(response.data);
             props.setEntered(false);
@@ -42,11 +77,11 @@ export default function Login(props) {
                 setError("Credentials do not match");
             } else if (err?.response?.status === 401) {
                 setError("Unauthorized");
-            }else if(err?.response?.data?.message?.includes("is null")) {
+            } else if (err?.response?.data?.message?.includes("is null")) {
                 console.log(err.response.data.message);
-                    setError("You didn't verify your email yet")
-                }
-             else {
+                setError("You didn't verify your email yet")
+            }
+            else {
                 setError("Check username and password");
             }
 
@@ -68,15 +103,15 @@ export default function Login(props) {
     return (
         <>  <PizzaCard>
             <div className="flex flex-col items-center justify-center">
-            <h2 className="text-center ui header mb-8" style={{fontFamily:'Bookman, URW Bookman L, serif',marginLeft:'5px',fontWeight:'200'}}>Login</h2>
+                <h2 className="text-center ui header mb-8" style={{ fontFamily: 'Bookman, URW Bookman L, serif', marginLeft: '5px', fontWeight: '200' }}>Login</h2>
                 <div className="ui input focus mb-3 ml-2">
-                    <input value={name} onChange={(e) => setName(e.target.value)}  type="text" placeholder="Name" required />
+                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Name" required />
                 </div>
                 <div className="ui input focus mb-3 ml-2">
-                    <input value={email} onChange={(e) => setEmail(e.target.value)}  type="text" placeholder="Email" className="border border-gray-500 p-2 rounded-lg" required></input>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" className="border border-gray-500 p-2 rounded-lg" required></input>
                 </div>
                 <div className="ui input focus mb-8 ml-2">
-                    <input value={pwd} onChange={(e) => setPwd(e.target.value)}  type="password" placeholder="Password" className="border border-gray-500 p-2 rounded-lg" required></input>
+                    <input value={pwd} onChange={(e) => setPwd(e.target.value)} type="password" placeholder="Password" className="border border-gray-500 p-2 rounded-lg" required></input>
                 </div>
                 <button onClick={handleSubmit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Login</button>
                 <br></br>
