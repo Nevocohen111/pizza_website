@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "AuditAwareBean")
 public class PizzaShopApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaShopApplication.class, args);
 	}
