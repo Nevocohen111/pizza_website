@@ -1,6 +1,7 @@
 import React, { useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
+import emblem from "../assets/images/webEmblem.png";
 import '../App';
 
 
@@ -26,6 +27,7 @@ useEffect (() => {
     <>
       <div className="ui inverted segment">
         <div className="ui inverted secondary pointing menu navbarChangeSize">
+          {auth?.name === undefined ?<img src = {emblem}  alt = "emblem" style={{right:"20px",position:"absolute",borderRadius:'50%',height:'4vh',width:'2vw',}}></img> : null}
           {auth?.name !== undefined ? <div className="ui simple dropdown item" style={{right:"20px",position:"absolute"}}>
           <p onClick={() => {navigate("/home")}} className="1xl" style={{fontFamily:"cursive",color:'orange'}}>Welcome in {auth.name} <i style={{color:'orange'}} className="smile icon"></i></p></div> : null}
           <li onClick={() => { navigate("/home") }}  className="w3-bar-item w3-button item">Home</li>
