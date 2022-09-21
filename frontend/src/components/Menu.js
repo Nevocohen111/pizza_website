@@ -97,6 +97,9 @@ export default function Menu() {
 
     return (
         <>
+        <div className="ui container">
+                        <h1 className="ui header text-center" style={{ position: 'relative', bottom: '50px', color: '#f1800e', textDecoration: 'underline' }}>Our Pizzas</h1>
+                    </div>
             {!toggle ? menu?.map((item, index) => (
                 <div className="flex flex-col items-center justify-center mt-20"  key={index}>
                     <div className="ui  padded text container segment menuHeader" style={{ opacity: "0.8",backgroundColor:'#E97451' }} >
