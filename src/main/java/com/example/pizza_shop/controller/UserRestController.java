@@ -59,7 +59,7 @@ public class UserRestController {
             userService.updateActivateFieldByToken(access);
             return ResponseEntity.status(HttpStatus.OK).body(new Response("Account activated"));
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("An error has occurred.\nPlease try again later."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("An error has occurred,Please try again later."));
     }
 
     @Transactional
