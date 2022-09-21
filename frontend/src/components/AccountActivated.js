@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function AccountActivated(props) {
+  const [error, setError] = useState("");
 
     useEffect (() => {
         window.localStorage.clear();
@@ -25,7 +26,7 @@ export default function AccountActivated(props) {
                 if (data.message === "Account activated") {
                     navigate("/loginAccess=true",{state: {loginAccess: "Thanks for registering! You can now login."}});
                 } else {
-                    console.log(data)
+                     setError(data?.message);
                 }
             })
     }
@@ -46,6 +47,7 @@ export default function AccountActivated(props) {
     <div className="description text-center">
     <button className="ui primary button" onClick={activationPostRequest}>Activate Account</button>
     </div>
+     {error !== "" ? <p className="ui error message text-center" style={{ position: 'relative', top: '20px' }}>{error}</p> : null}
 </div>
 </div>
     )
