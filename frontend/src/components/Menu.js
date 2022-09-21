@@ -97,7 +97,7 @@ export default function Menu() {
 
     return (
         <>
-        {auth.name !== undefined ?
+        {auth?.name !== undefined ?
         <div className="ui container">
            <h1 className="ui header text-center" style={{ position: 'relative', bottom: '50px', color: '#f1800e', textDecoration: 'underline' }}>Our Pizzas</h1>
          </div>

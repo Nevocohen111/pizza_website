@@ -54,7 +54,7 @@ export default function MyOrders() {
 
     return (
         <>
-        {auth.name !== undefined ?
+        {auth?.name !== undefined ?
         <div className="ui container">
            <h1 className="ui header text-center" style={{position:'relative',bottom:'50px',color:'#f1800e',textDecoration:'underline'}}>My Orders</h1>
          </div>

@@ -1,9 +1,11 @@
 import React,{useEffect} from "react";
+import AuthContext from "../context/AuthProvider";
 import "../App.css";
 
 
 export default function SearchAnInput(props) {
     const [entry, setEntry] = React.useState("");
+    const {auth} = React.useContext(AuthContext);
 
     const onFormSubmit = (event) => {
         event.preventDefault();
@@ -19,11 +21,10 @@ export default function SearchAnInput(props) {
     return (
 
         <div>
-        {auth.name !== undefined ?
-          <div className="ui container">
-            <h1 className="ui header text-center" style={{ position: 'relative', bottom: '50px', color: '#f1800e', textDecoration: 'underline' }}>Photo Finder</h1>
-          </div>
-          : null}
+        {auth?.name !== undefined ?
+        <div className="ui container">
+          <h1 className="ui header text-center" style={{ position: 'relative', bottom: '50px', color: '#f1800e', textDecoration: 'underline' }}>Photo Finder</h1>
+         </div> : null}
             <div className="flex flex-col items-center justify-center p-20">
                 <form>
                     <div className="ui massive icon input mb-8">
