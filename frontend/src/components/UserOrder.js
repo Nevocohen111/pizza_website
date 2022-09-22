@@ -46,7 +46,7 @@ export default function UserOrder(props) {
         setCount(JSON.parse(window.localStorage.getItem('count')));
         setPizzaName(JSON.parse(window.localStorage.getItem('pizzaName')))
 
-        if(JSON.parse(window.localStorage.getItem('count')) > 2) {
+        if (window.localStorage.getItem('count') > 10) {
             window.localStorage.removeItem('count');
         }
 

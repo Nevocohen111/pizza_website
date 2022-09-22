@@ -19,6 +19,9 @@ export default function MyOrders() {
     }, [userData])
 
     useEffect(() => {
+    if(window.localStorage.getItem('count') > 2)
+        window.localStorage.removeItem('count');
+
         setUserData(JSON.parse(window.localStorage.getItem('OrdersList')));
         document.body.classList.remove("textBG");
 
