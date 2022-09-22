@@ -1,5 +1,5 @@
 # pizza_website
-1) Spring backend and React frontend using SQL relational DB website app.
+* Spring backend and React frontend using SQL relational DB website app.
 2) Follow the instructions in application.config in order for the appilication to run.
 3) make sure you run it via maven environment using Eclipse/intellij or webStorm IDE's.
 4) make sure you clone the project correctly.
