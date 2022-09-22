@@ -18,6 +18,8 @@ import AccessibilityButton from './components/AccessibilityButton';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound';
 import DeleteAccountBtn from './components/DeleteAccountBtn';
+import Advertisement from './components/Advertisement';
+
 
 
 
@@ -28,8 +30,12 @@ function App() {
   const [images, setImages] = useState([]);
   const [searchParams] = useSearchParams();
 
+
+
   var token = searchParams.get("token");
   var access = searchParams.get("access");
+
+
 
   const onSearchSubmit = async (entry) => {
     const response = await axios.get(`https://pixabay.com/api/?key=29726177-f028e9e1819b55bfa3ef7bbf5&q=${entry}&image_type=photo`)
@@ -37,9 +43,13 @@ function App() {
     setImages(data);
   }
 
+
+
   useEffect(() => {
     if (auth?.name !== undefined && auth?.accessToken !== null) {
+      window.localStorage.setItem("showCookies", false);
       window.localStorage.setItem('MY_AUTH_KEY', JSON.stringify(auth));
+      window.localStorage.removeItem('showCookies')
     }
   }, [auth])
 
@@ -56,6 +66,7 @@ function App() {
 
   return (
     <div>
+
       {!show404 ? <Navbar setShow404={setShow404} /> : null}
       {!show404 ? <AccessibilityButton /> : null}
       {!show404 && auth?.name !== undefined ? <DeleteAccountBtn /> : null}
