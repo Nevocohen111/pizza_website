@@ -15,7 +15,7 @@ export default function UserOrder(props) {
     const [address, setAddress] = useState("");
     const [error, setError] = useState("");
     const [authName, setAuthName] = useState("");
-    const [count, setCount] = useState(0);
+    const[count, setCount] = useState(0);
     const navigate = useNavigate();
  
 
@@ -38,28 +38,26 @@ export default function UserOrder(props) {
         }
     }
 
+    useEffect (() => {
+        document.body.classList.remove("textBG");
+        setAuthName(JSON.parse(window.localStorage.getItem('authName')));
+        setEmail(JSON.parse(window.localStorage.getItem('email')));
+        setPrice(JSON.parse(window.localStorage.getItem('price')));
+        setCount(JSON.parse(window.localStorage.getItem('count')));
+        setPizzaName(JSON.parse(window.localStorage.getItem('pizzaName')))
 
-      useEffect (() => {
-              document.body.classList.remove("textBG");
-              setAuthName(JSON.parse(window.localStorage.getItem('authName')));
-              setEmail(JSON.parse(window.localStorage.getItem('email')));
-              setPrice(JSON.parse(window.localStorage.getItem('price')));
-              setCount(JSON.parse(window.localStorage.getItem('count')));
-              setPizzaName(JSON.parse(window.localStorage.getItem('pizzaName')))
+        if(JSON.parse(window.localStorage.getItem('count')) > 2) {
+            window.localStorage.removeItem('count');
+        }
 
-              if(JSON.parse(window.localStorage.getItem('count')) > 2) {
-                  window.localStorage.removeItem('count');
-              }
+        if(JSON.parse(window.localStorage.getItem('count')) < 1) {
+        const interval = setInterval(() => {
+            window.location.reload();
+        }, 1000);
 
-              if(JSON.parse(window.localStorage.getItem('count')) < 1) {
-              const interval = setInterval(() => {
-                  window.location.reload();
-              }, 100);
-
-              return () => clearInterval(interval);
-          }
-          },[])
-
+        return () => clearInterval(interval);
+    }
+    },[count])
 
     useEffect(() => {
         if(auth.name !== undefined) {
@@ -67,9 +65,9 @@ export default function UserOrder(props) {
         window.localStorage.setItem('email', JSON.stringify(auth.email));
         window.localStorage.setItem('price', JSON.stringify(props.itemPrice));
         window.localStorage.setItem('pizzaName', JSON.stringify(props.itemName));
+        window.localStorage.setItem('count', JSON.stringify(count + 1));
         }
-    }, [])
-
+    }, [auth.name,count])
 
     var text = props.itemPrice;
     var largePrice = parseInt(text);
