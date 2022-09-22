@@ -93,7 +93,7 @@ export default function UserOrder(props) {
                             </select>
                         </div>
                         <button className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full mb-8" style={{ marginLeft: "82px" }} onClick={() => { handleSubmit() }}>Purchase</button>
-                        {error ? <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{error}</div> : null}
+                        {error ? <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center" role="alert">{error}</div> : null}
                         </div>
         </PizzaCard>
         </>
