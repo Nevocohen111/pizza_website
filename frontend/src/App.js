@@ -17,8 +17,7 @@ import ResetPassword from './components/ResetPassword';
 import AccessibilityButton from './components/AccessibilityButton';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound';
-import DeleteAccountBtn from './components/DeleteAccountBtn';
-import Advertisement from './components/Advertisement';
+import Timer from './components/Timer';
 
 
 
@@ -66,12 +65,11 @@ function App() {
 
   return (
     <div>
-
       {!show404 ? <Navbar setShow404={setShow404} /> : null}
       {!show404 ? <AccessibilityButton /> : null}
-      {!show404 && auth?.name !== undefined ? <DeleteAccountBtn /> : null}
       <ScrollToTop />
       <Routes>
+        <Route path="/timer" element={<Timer />} />
         <Route path={`/activate`} element={<AccountActivated access={access} />}></Route>
         <Route path={`/resetPassword`} element={<ResetPassword token={token} />}></Route>
         <Route path="/gallery" element={<SearchAnInput images={images} onSearchSubmit={onSearchSubmit} />}></Route>

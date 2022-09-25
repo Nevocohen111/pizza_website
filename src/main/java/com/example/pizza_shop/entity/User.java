@@ -1,6 +1,4 @@
 package com.example.pizza_shop.entity;
-
-import com.example.pizza_shop.annotation.FieldsMatch;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
