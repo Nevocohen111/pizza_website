@@ -14,6 +14,7 @@ export default function Login(props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
+    const {setShowBanner} = useContext(AuthContext);
     const [error, setError] = useState("");
     const [errorFlag, setErrorFlag] = useState(false);
     const [cookies, setCookie] = useCookies(['user']);
@@ -76,8 +77,11 @@ export default function Login(props) {
             const roles = response.data?.role.roleId;
             const accessToken = response.data.accessToken;
             setAuth({ name, email, roles, accessToken });
-            if (isCookie) 
+            if (isCookie) {
+                setShowBanner("f");
                 submit();
+
+            }
             
             navigate(`/login=true`);
         }
