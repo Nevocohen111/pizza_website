@@ -29,7 +29,7 @@ export default function DeleteAccountBtn() {
     }
     return (
         <div style={{marginLeft:'1rem'}}>
-                   <button onClick={alertBox} className="negative ui button">Delete Account</button>
+            <button onClick={alertBox} className="negative ui button">Delete Account</button>
         </div>
     )
 }

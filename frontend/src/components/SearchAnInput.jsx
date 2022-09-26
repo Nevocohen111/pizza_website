@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import AuthContext from "../context/AuthProvider";
 import "../App.css";
 
 
 export default function SearchAnInput(props) {
     const [entry, setEntry] = React.useState("");
-    const { auth } = React.useContext(AuthContext);
 
     const onFormSubmit = (event) => {
         event.preventDefault();

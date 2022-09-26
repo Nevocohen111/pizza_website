@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import { useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/AuthProvider";
 import PizzaCard from "./PizzaCard";
 import axios from "axios";
 import Advertisement from "./Advertisement";
 import { useNavigate } from "react-router-dom";
+
 import pizzaImage1 from "../assets/images/image1.jpg";
 import pizzaImage2 from "../assets/images/image2.jpg";
 import pizzaImage3 from "../assets/images/image3.jpg";
@@ -22,6 +22,7 @@ export default function Menu() {
     const { auth } = useContext(AuthContext);
     const [error, setError] = useState("");
     const [size, setSize] = useState("");
+
     const navigate = useNavigate();
 
     const urlList = [pizzaImage1, pizzaImage2, pizzaImage3, pizzaImage4, pizzaImage5, pizzaImage6, pizzaImage7];
@@ -94,18 +95,17 @@ export default function Menu() {
     useEffect(() => {
         document.body.classList.remove("textBG");
         getMenu()
+
     }, [])
 
     return (
         <>
             {auth?.name !== undefined ?
                 <div className="ui center aligned icon header" >
-                <i className="circular clipboard list icon" style={{backgroundColor:'#E97451',position:"relative",top:'-1rem'}}></i>
-                </div>
- 
-                : null}
-                      { auth?.name === undefined ? <Advertisement/> : null}
-            {!toggle ? menu?.map((item, index) => (
+                    <i className="circular clipboard list icon" style={{ backgroundColor: '#E97451', position: "relative", top: '-1rem' }}></i>
+                </div> : null}
+            {auth?.name === undefined ? <Advertisement /> : null}
+            {!toggle && menu?.length >= 0 ? menu?.map((item, index) => (
                 <div className="flex flex-col items-center justify-center mt-5 slide-in-left" key={index}>
                     <div className="ui  padded text container segment menuHeader" style={{ opacity: "0.8", backgroundColor: '#E97451' }} >
                         <div className="text-center ui header" style={{ fontFamily: "serif" }}>{item.name}</div>
@@ -114,17 +114,14 @@ export default function Menu() {
                         <p className="mb-2 text-center menuText" style={{ fontFamily: 'cursive' }}>Price: {item.price}$</p>
                         <p className="ui text mb-2 text-center menuText" style={{ fontFamily: 'cursive', position: 'relative' }}>Size: {item.size}</p>
                         {!isAuth(auth) ? <p className="ui text mb-2  menuText" style={{ color: 'yellow', fontWeight: 'bolder', position: 'relative' }}>Log in to your account in order to make a purchase and win rewards!</p> : null}
-
                         {isAuth(auth) && auth?.name !== "Admin" ? <button onClick={() => navigate(`/userOrder&user=${auth?.name}`, { state: { itemName: item.name, itemPrice: item.price } })} className="ui primary button menuButton" style={{ marginRight: '50rem' }}>Order</button> : null}
                         {auth?.name === "Admin" ? <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={() => handleDeleteById(item.id)}>Delete</button> : null}
                     </div>
-
                 </div>
             )) :
                 <PizzaCard>
                     <h3 className="ui header text-center">Make your pizza!</h3>
                     <div className="space-x-4 mt-8">
-
                         <input value={name} onChange={(e) => (setName(e.target.value))} type="text" placeholder="Pizza name" style={{ marginLeft: '30px' }} className="text-center mb-4 ml-4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500  rounded-md sm:text-sm focus:ring-1" />
                         <input value={price} onChange={(e) => (setPrice(e.target.value))} type="text" placeholder="Pizza price" style={{ marginLeft: '30px' }} className="text-center mb-4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500  rounded-md sm:text-sm focus:ring-1" />
                         <div className="flex flex-col mb-2" style={{ marginLeft: '30px' }}>
@@ -138,14 +135,10 @@ export default function Menu() {
                         <button className="bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full mb-8" style={{ marginLeft: "60px" }} onClick={() => { handleSubmit() }}>Add product</button>
                         {error ? <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{error}</div> : null}
                     </div>
+                </PizzaCard>}
+            {!toggle && menu.length <= 0 ? <div className="ui active centered inline loader"></div> : null}
 
-                </PizzaCard> }
-                    {!toggle && menu?.length <= 0 ? <div className="ui segment" style={{ height: "50vh", width: '30vw', marginLeft: 'calc(50vw - 15vw)' }}>
-                                <div className="ui active dimmer">
-                                    <div className="ui indeterminate text loader">Preparing Files</div>
-                                </div>
-                                <p></p>
-                            </div> : null}
+
             <div className="flex flex-col items-center justify-center mt-10">
                 {!toggle && auth?.name === "Admin" && menu.length !== 0 ? <button className=" text-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full " onClick={() => setToggle(!toggle)} >{toggle ? toggle : !toggle}Hey Admin, add a pizza.</button> : <div></div>}
                 {!toggle && isAuth(auth) && menu.length === 0 ?

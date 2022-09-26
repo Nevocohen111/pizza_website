@@ -1,8 +1,8 @@
 import React, { useContext,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
-import DeleteAccountBtn from "./DeleteAccountBtn";
 import emblem from "../assets/images/webEmblem.png";
+import DeleteAccountBtn from "./DeleteAccountBtn";
 import '../App';
 
 
@@ -32,7 +32,7 @@ useEffect (() => {
           {auth?.name === undefined ?<img src = {emblem}  alt = "emblem" style={{right:"20px",position:"absolute",borderRadius:'50%',height:'4vh',width:'2vw',}}></img> : null}
           {auth?.name !== undefined ? <div className="ui simple dropdown item" style={{right:"20px",position:"absolute"}}>
           <p onClick={() => {navigate("/home")}} className="1xl" style={{fontFamily:"cursive",color:'orange'}}>Welcome in {auth.name} <i style={{color:'orange'}} className="smile icon"></i></p></div> : null}
-          <li onClick={() => { navigate("/home") }}  className="w3-bar-item w3-button item">Home</li>
+          <li onClick={() => { navigate("/home") }}  className="w3-bar-item w3-button item active">Home</li>
           <li onClick={() => { navigate("/menu") }} className="w3-bar-item w3-button">Menu</li>
           {auth?.name === undefined ? <li onClick={() => { navigate("/register"); }} className="w3-bar-item w3-button">Register</li> : null}
           <li onClick={() => navigate("/gallery")} className="w3-bar-item w3-button">Gallery</li>
