@@ -1,16 +1,27 @@
 import React from "react";
 import Portal from "./Portal";
 import { useEffect } from "react";
+import myCursor from "../assets/images/cursor.png";
 
 export default function AccessibilityButton() {
     const [grayScale, setGrayScale] = React.useState(false);
     const [contrast, setContrast] = React.useState(false);
     const [fontSize, setFontSize] = React.useState(false);
+    const [cursor, setCursor] = React.useState(false);
     const [showModal, setShowModal] = React.useState(false);
 
     useEffect(() => {
         document.body.classList.remove("textBG");
     }, [])
+
+    const toggleCursorOnClick = () => {
+        setCursor(!cursor);
+        if (cursor) {
+            document.body.style.cursor = `url(${myCursor}), auto`;
+        } else {
+            document.body.style.cursor = "default";
+        }
+    }
 
     const toggleBodyColorOnClick = () => {
         setGrayScale(!grayScale);
@@ -67,6 +78,7 @@ export default function AccessibilityButton() {
                         <button onClick={() => { toggleBodyColorOnClick() }} className="item">Gray Shade <i className="bitbucket icon"></i></button>
                         <button onClick={() => { toggleBodyContrastOnClick() }} className="item">Contrasity <i className="adjust icon" style={{ position: 'relative', left: '5px' }}></i></button>
                         <button onClick={() => { toggleBodyFontSizeOnClick() }} className="item">Big Font <i className="font icon" style={{ position: 'relative', left: '20px' }}></i></button>
+                        <button onClick={() => {toggleCursorOnClick ()}} className="item">Cursor <i className="mouse pointer icon" style={{ position: 'relative', left: '29px' }}></i></button>
                         <button onClick={() => setShowModal(true)} className="item"><p style={{ fontSize: '0.8rem', color: '#4169e1', fontWeight: 'bolder' }}>Accessibility statement</p></button>
                     </div>
                 </div>

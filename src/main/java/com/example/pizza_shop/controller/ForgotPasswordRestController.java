@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
@@ -67,7 +66,7 @@ public class ForgotPasswordRestController {
                 return new Response("Invalid token");
             }
         } else {
-            return new Response("Token is null");
+            return new Response("Token expired");
         }
   }
 

@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Order(1)
 public class RestExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<HttpCustomResponse> exceptionHandler(Exception e, Errors errors) {;
+    public ResponseEntity<HttpCustomResponse> exceptionHandler(Exception e, Errors errors) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new HttpCustomResponse(500,errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).reduce((x, y) -> x + " " + y)
-                        .orElse(e.getMessage())));
+                .body(new HttpCustomResponse(500,errors.getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
+                         .reduce((x, y) -> x + " " + y)
+                         .orElse(e.getMessage())));
     }
 
 
